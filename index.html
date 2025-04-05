@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Path Predictor</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="min-h-screen pb-10">
+    <div class="container mx-auto px-4 py-8">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-3xl font-bold text-5D5CDE">Career Path Predictor</h1>
+            <button id="themeToggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+            </button>
+        </div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+            <!-- Input Panel -->
+            <div class="lg:col-span-3 bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-semibold mb-4 text-5D5CDE">Your Information</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Personal Information -->
+                    <div>
+                        <h3 class="font-medium mb-2 text-5D5CDE">Personal Details</h3>
+                        <div class="mb-3">
+                            <label for="age" class="block text-gray-700 dark:text-gray-300 mb-1">Age</label>
+                            <input type="number" id="age" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" min="15" max="50" value="20">
+                        </div>
+                        <div class="mb-3">
+                            <label for="gender" class="block text-gray-700 dark:text-gray-300 mb-1">Gender</label>
+                            <select id="gender" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="siblings" class="block text-gray-700 dark:text-gray-300 mb-1">Number of Siblings</label>
+                            <input type="number" id="siblings" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" min="0" max="10" value="1">
+                        </div>
+                        <div class="mb-3">
+                            <label for="financial" class="block text-gray-700 dark:text-gray-300 mb-1">Financial Stability (1-10)</label>
+                            <input type="range" id="financial" class="w-full" min="1" max="10" value="5">
+                            <div class="flex justify-between text-xs text-gray-500">
+                                <span>Low</span>
+                                <span id="financialValue">5</span>
+                                <span>High</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Educational Information -->
+                    <div>
+                        <h3 class="font-medium mb-2 text-5D5CDE">Education & Skills</h3>
+                        <div class="mb-3">
+                            <label for="eduLevel" class="block text-gray-700 dark:text-gray-300 mb-1">Highest Education Level</label>
+                            <select id="eduLevel" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="High School">High School</option>
+                                <option value="Under Graduate" selected>Under Graduate</option>
+                                <option value="Post Graduate">Post Graduate</option>
+                                <option value="Doctorate">Doctorate</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="subjects" class="block text-gray-700 dark:text-gray-300 mb-1">Preferred Subjects</label>
+                            <select id="subjects" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="Science" selected>Science</option>
+                                <option value="Commerce">Commerce</option>
+                                <option value="Arts">Arts</option>
+                                <option value="Humanities">Humanities</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="performance" class="block text-gray-700 dark:text-gray-300 mb-1">Academic Performance</label>
+                            <div class="flex space-x-2">
+                                <input type="number" id="performance" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" min="0" max="100" value="85">
+                                <select id="performanceType" class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <option value="percentage">%</option>
+                                    <option value="cgpa">CGPA</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="techSavvy" class="block text-gray-700 dark:text-gray-300 mb-1">Tech Savviness</label>
+                            <select id="techSavvy" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="Basic knowledge">Basic knowledge</option>
+                                <option value="Good Coding knowledge" selected>Good Coding knowledge</option>
+                                <option value="Advanced tech skills">Advanced tech skills</option>
+                                <option value="Comfortable using newly launched technologies">Comfortable with new technologies</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Personality & Preferences -->
+                <h3 class="font-medium mt-4 mb-2 text-5D5CDE">Personality & Preferences</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="mb-3">
+                        <label for="extracurricular" class="block text-gray-700 dark:text-gray-300 mb-1">Extracurricular Activities</label>
+                        <select id="extracurricular" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="None">None</option>
+                            <option value="Sports" selected>Sports</option>
+                            <option value="Culturals">Culturals</option>
+                            <option value="Multiple">Multiple Activities</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="workExp" class="block text-gray-700 dark:text-gray-300 mb-1">Previous Work Experience</label>
+                        <select id="workExp" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="None" selected>None</option>
+                            <option value="Internship">Internship</option>
+                            <option value="Part Time">Part Time</option>
+                            <option value="Full Time">Full Time</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="preferredEnv" class="block text-gray-700 dark:text-gray-300 mb-1">Preferred Work Environment</label>
+                        <select id="preferredEnv" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="Corporate Job">Corporate Job</option>
+                            <option value="Startup" selected>Startup</option>
+                            <option value="Research">Research</option>
+                            <option value="Freelance">Freelance</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="riskTaking" class="block text-gray-700 dark:text-gray-300 mb-1">Risk-Taking Ability (1-10)</label>
+                        <input type="range" id="riskTaking" class="w-full" min="1" max="10" value="7">
+                        <div class="flex justify-between text-xs text-gray-500">
+                            <span>Low</span>
+                            <span id="riskValue">7</span>
+                            <span>High</span>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="leadership" class="block text-gray-700 dark:text-gray-300 mb-1">Leadership Experience</label>
+                        <select id="leadership" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="None">None</option>
+                            <option value="Team Leader" selected>Team Leader</option>
+                            <option value="Event Management">Event Management</option>
+                            <option value="Student Council Member">Student Council Member</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="networking" class="block text-gray-700 dark:text-gray-300 mb-1">Networking & Social Skills</label>
+                        <select id="networking" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="Limited">Limited</option>
+                            <option value="Average" selected>Average</option>
+                            <option value="Attended Conferences">Attended Conferences</option>
+                            <option value="Attended Corporate events">Attended Corporate events</option>
+                            <option value="Attended Business meets">Attended Business meets</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="motivation" class="block text-gray-700 dark:text-gray-300 mb-1">Motivation for Career Choice</label>
+                        <select id="motivation" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="Passion" selected>Passion</option>
+                            <option value="Money">Money</option>
+                            <option value="Social Impact">Social Impact</option>
+                            <option value="Job Security">Job Security</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="sticky bottom-4 mt-6 bg-white dark:bg-gray-800 p-4 border-t border-gray-100 dark:border-gray-700 rounded-b-lg">
+                    <button id="predictBtn" class="w-full bg-black text-white font-bold py-3 px-4 rounded-md shadow-md">
+                        Predict My Career Path
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Prediction Results -->
+            <div class="lg:col-span-2 bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-semibold mb-4 text-5D5CDE">Prediction Results</h2>
+                <div id="resultsLoading" class="hidden">
+                    <div class="flex justify-center items-center h-64">
+                        <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-5D5CDE"></div>
+                    </div>
+                </div>
+                <div id="resultsContent" class="hidden">
+                    <div class="mb-6">
+                        <h3 class="font-medium text-lg mb-2">Most Likely Career Path</h3>
+                        <div id="topPrediction" class="bg-blue-50 dark:bg-blue-900/30 border border-blue-100 dark:border-blue-800 rounded-lg p-4">
+                            <p class="text-lg font-bold text-5D5CDE" id="careerTitle">Entrepreneur</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-300" id="confidenceScore">Confidence: 78%</p>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="font-medium text-lg mb-2">All Predictions</h3>
+                        <div class="h-64">
+                            <canvas id="predictionsChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                        <h3 class="font-medium text-lg mb-2">Career Insights</h3>
+                        <div id="careerAnalysis" class="text-sm text-gray-700 dark:text-gray-300">
+                            <p class="mb-2">Based on your profile, you show strong entrepreneurial tendencies with high risk-taking ability and leadership skills.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="initialContent" class="flex flex-col items-center justify-center h-64 text-center text-gray-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mb-4 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                    </svg>
+                    <p>Enter your information and click "Predict" to see your career path prediction.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Feature Importance Section -->
+        <div class="mt-8 bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+            <h2 class="text-xl font-semibold mb-4 text-5D5CDE">Feature Importance</h2>
+            <p class="text-gray-700 dark:text-gray-300 mb-4">This chart shows which factors have the most influence on career predictions in our model.</p>
+            <div class="h-80">
+                <canvas id="featureImportanceChart"></canvas>
+            </div>
+        </div>
+        
+        <!-- Career Paths Cards -->
+        <div class="mt-8">
+            <h2 class="text-xl font-semibold mb-4 text-5D5CDE">Career Path Profiles</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- Career Path Cards -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden card-transition">
+                    <div class="h-2 bg-blue-600"></div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-lg mb-2">Government Officer</h3>
+                        <p class="text-gray-700 dark:text-gray-300 text-sm mb-4">Stability-focused career with structured progression and job security.</p>
+                        <div class="flex items-center text-xs text-gray-500 dark:text-gray-400">
+                            <span class="mr-2">Key traits:</span>
+                            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded">Structure</span>
+                            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded ml-1">Security</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden card-transition">
+                    <div class="h-2 bg-green-600"></div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-lg mb-2">Entrepreneur</h3>
+                        <p class="text-gray-700 dark:text-gray-300 text-sm mb-4">Innovation-driven path requiring risk-taking and creative problem-solving.</p>
+                        <div class="flex items-center text-xs text-gray-500 dark:text-gray-400">
+                            <span class="mr-2">Key traits:</span>
+                            <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded">Risk-taking</span>
+                            <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded ml-1">Innovation</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden card-transition">
+                    <div class="h-2 bg-purple-600"></div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-lg mb-2">Research Scientist</h3>
+                        <p class="text-gray-700 dark:text-gray-300 text-sm mb-4">Analysis-focused path for those who enjoy deep exploration and discovery.</p>
+                        <div class="flex items-center text-xs text-gray-500 dark:text-gray-400">
+                            <span class="mr-2">Key traits:</span>
+                            <span class="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 px-2 py-1 rounded">Analytical</span>
+                            <span class="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 px-2 py-1 rounded ml-1">Curiosity</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden card-transition">
+                    <div class="h-2 bg-amber-600"></div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-lg mb-2">Corporate Professional</h3>
+                        <p class="text-gray-700 dark:text-gray-300 text-sm mb-4">Balance of structure and advancement with networking opportunities.</p>
+                        <div class="flex items-center text-xs text-gray-500 dark:text-gray-400">
+                            <span class="mr-2">Key traits:</span>
+                            <span class="bg-amber-100 dark:bg-amber-900 text-amber-800 dark:text-amber-200 px-2 py-1 rounded">Networking</span>
+                            <span class="bg-amber-100 dark:bg-amber-900 text-amber-800 dark:text-amber-200 px-2 py-1 rounded ml-1">Ambition</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/charts.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html> 
